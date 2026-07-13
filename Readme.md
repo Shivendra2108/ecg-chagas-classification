@@ -32,8 +32,8 @@ This repo currently contains a **clean, leak-free baseline pipeline** — the go
 
 | Metric | Value |
 |---|---|
-| Test Accuracy | `<fill in>` |
-| AUC-ROC | `<fill in>` |
+| Test Accuracy | `<0.9833>` |
+| AUC-ROC | `<0.7288>` |
 
 Baseline expectation at this sample size is AUC ~0.65–0.72; 0.80+ will need class-imbalance handling and more data (see Roadmap).
 
@@ -70,9 +70,9 @@ LABELS_PATH = "../data/code15_chagas_labels.csv"
 | 5 | HuggingFace Spaces demo | Lets reviewers/recruiters interact without running code |
 
 ## Repository structure
-.
-baseline2.ipynb        # Clean baseline pipeline (this README describes this notebook)
-data/                  # Labels CSV (not tracked — see .gitignore)
-processed_data/        # WFDB signal files (not tracked)
-models/                # Saved model weights
+
+1. baseline2.ipynb        # Clean baseline pipeline (this README describes this notebook)
+2. data/                  # Labels CSV (not tracked — see .gitignore)
+3. processed_data/        # WFDB signal files (not tracked)
+4. models/                # Saved model weights
 
