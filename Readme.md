@@ -71,8 +71,8 @@ LABELS_PATH = "../data/code15_chagas_labels.csv"
 
 ## Repository structure
 .
-├── baseline2.ipynb        # Clean baseline pipeline (this README describes this notebook)
-├── data/                  # Labels CSV (not tracked — see .gitignore)
-├── processed_data/        # WFDB signal files (not tracked)
-└── models/                # Saved model weights
+baseline2.ipynb        # Clean baseline pipeline (this README describes this notebook)
+data/                  # Labels CSV (not tracked — see .gitignore)
+processed_data/        # WFDB signal files (not tracked)
+models/                # Saved model weights
 
