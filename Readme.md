@@ -25,3 +25,48 @@ This repo currently contains a **clean, leak-free baseline pipeline** — the go
 6. **Evaluate** on accuracy, AUC-ROC, confusion matrix, and per-class precision/recall
 
 ## Model
+
+`AdaptiveAvgPool1d` means the model isn't tied to a fixed input length. Sigmoid is applied only at inference time — `BCEWithLogitsLoss` handles it internally during training for numerical stability.
+
+## Results (300 samples)
+
+| Metric | Value |
+|---|---|
+| Test Accuracy | `<fill in>` |
+| AUC-ROC | `<fill in>` |
+
+Baseline expectation at this sample size is AUC ~0.65–0.72; 0.80+ will need class-imbalance handling and more data (see Roadmap).
+
+## Design decisions (bugs this baseline deliberately avoids)
+
+- **Labels from CSV, not ECG header comments** — header-based label extraction was tried earlier and produced degenerate all-one labels
+- **Split before normalization** — prevents test-set statistics leaking into training
+- **`BCEWithLogitsLoss` with no `Sigmoid` in the model** — avoids the double-sigmoid bug that silently corrupts gradients
+- **`torch.sigmoid()` applied only at prediction time**, never during training
+
+## Setup
+
+```bash
+pip install torch numpy pandas scikit-learn matplotlib wfdb
+```
+
+Update the paths at the top of the notebook to point to your local copy of the processed WFDB records and the labels CSV:
+```python
+DATA_PATH   = "../processed_data"
+LABELS_PATH = "../data/code15_chagas_labels.csv"
+```
+
+## Roadmap
+
+| Phase | What | Why it matters |
+|---|---|---|
+| 2 | Bandpass filter (0.5–40Hz), resample to common Hz | CODE-15% is 400Hz, PTB-XL is 500Hz — need consistent input |
+| 2 | `pos_weight` for class imbalance | Highest-impact fix for AUC at current scale |
+| 2 | Scale to 1000+ samples via `DataLoader` | Better generalization estimates |
+| 3 | Cross-dataset eval (train CODE-15%, test SaMi-Trop) | Tests real-world robustness — the core research gap |
+| 3 | GradCAM on 1D signals | Explainability — publishable and hireable |
+| 4 | INT8 quantization | Required before FPGA deployment |
+| 4 | FPGA deployment via HLS4ML or FINN | Edge-deployable inference — the differentiated contribution |
+| 5 | HuggingFace Spaces demo | Lets reviewers/recruiters interact without running code |
+
+## Repository structure
