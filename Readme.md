@@ -70,3 +70,9 @@ LABELS_PATH = "../data/code15_chagas_labels.csv"
 | 5 | HuggingFace Spaces demo | Lets reviewers/recruiters interact without running code |
 
 ## Repository structure
+.
+├── baseline2.ipynb        # Clean baseline pipeline (this README describes this notebook)
+├── data/                  # Labels CSV (not tracked — see .gitignore)
+├── processed_data/        # WFDB signal files (not tracked)
+└── models/                # Saved model weights
+
